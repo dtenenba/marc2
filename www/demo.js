@@ -1,15 +1,20 @@
 console.log("hello from demo.j2");
 
+
+function include(arr,obj) {
+    return (arr.indexOf(obj) != -1);
+}
+
 $(document).ready( function () {
 
 
 $("#select_all_rows").click(function() {
-    alert("sar");
+    $("#mytable tbody tr").addClass("row_selected");
 });
 
 
 $("#deselect_all_rows").click(function() {
-    $("#mytable tr").removeClass("row_selected");
+    $("#mytable tbody tr").removeClass("row_selected");
 });
 
 $("#send_to_r").click(function() {
@@ -18,11 +23,25 @@ $("#send_to_r").click(function() {
 
 
 
-$('#mytable').on('click', "tr", function() {
-        //alert("you clicked! and text is " + $(this).text());
-        console.log("you clicked");
+$('#mytable').on('click', "tbody tr", function() {
+        console.log("you clicked and text is " + $(this).text());
+
+        var classList =$(this).attr('class').split(/\s+/);
+        console.log("before, classes are: " + classList);
+
+        /*
+        if (include(classList, "even")) {
+            $(this).toggleClass("tr.even.row_selected");
+        } else {
+            $(this).toggleClass("tr.odd.row_selected");
+        }
+        */
+
 
         $(this).toggleClass('row_selected');
+        classList =$(this).attr('class').split(/\s+/);
+        console.log("after, classes are: " + classList);
+
     } );
 
 
